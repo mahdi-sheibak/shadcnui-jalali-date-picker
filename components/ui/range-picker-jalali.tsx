@@ -43,6 +43,7 @@ export function RangePickerJalali() {
           mode="range"
           selected={dateRange}
           onSelect={setDateRange}
+          defaultMonth={dateRange?.from}
         />
       </PopoverContent>
     </Popover>

@@ -39,6 +39,7 @@ export function DatePickerJalali() {
           mode="single"
           selected={date}
           onSelect={setDate}
+          defaultMonth={date}
           autoFocus
         />
       </PopoverContent>

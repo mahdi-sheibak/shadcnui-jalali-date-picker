@@ -43,6 +43,7 @@ export function MultiplePickerJalali() {
           mode="multiple"
           selected={dateList}
           onSelect={setDateList}
+          defaultMonth={dateList[0]}
           required={true}
           max={3}
         />
