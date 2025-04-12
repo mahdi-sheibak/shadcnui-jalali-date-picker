@@ -13,13 +13,18 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { jalaliFormatWeekdayName } from "@/lib/calendar";
-import CustomDropdown from "../custom-dropdown";
+import { DropdownWrapper, useDropdowns } from "../custom-dropdown";
 
 export function DropdownPickerJalali() {
   const [date, setDate] = React.useState<Date>();
+  const [pickerOpen, setPickerOpen] = React.useState(false);
+  const { openDropdowns, setDropdownOpen, isAnyDropdownOpen } = useDropdowns();
 
   return (
-    <Popover>
+    <Popover
+      open={pickerOpen}
+      onOpenChange={(e) => !isAnyDropdownOpen && setPickerOpen(e)}
+    >
       <PopoverTrigger asChild>
         <Button
           variant={"outline"}
@@ -37,9 +42,13 @@ export function DropdownPickerJalali() {
           mode="single"
           captionLayout="dropdown"
           components={{
-            Dropdown(props) {
-              return <CustomDropdown props={props} />;
-            },
+            Dropdown: (props) => (
+              <DropdownWrapper
+                props={props}
+                openDropdowns={openDropdowns}
+                setDropdownOpen={setDropdownOpen}
+              />
+            ),
           }}
           startMonth={new Date(2020, 0)}
           selected={date}
