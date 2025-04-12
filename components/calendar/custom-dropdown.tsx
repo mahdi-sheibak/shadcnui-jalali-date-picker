@@ -23,9 +23,8 @@ export default function CustomDropdown({
   onOpenChange,
 }: {
   props: DropDownType;
-  // TODO: make bellow types required
-  open?: boolean;
-  onOpenChange?: (value: boolean) => void;
+  open: boolean;
+  onOpenChange: (value: boolean) => void;
 }): React.JSX.Element | undefined {
   const { options, value, onChange, dir } = props;
   const validDir = dir === "ltr" || dir === "rtl" ? dir : undefined;
@@ -57,6 +56,7 @@ export default function CustomDropdown({
           "transition-colors",
           "hover:bg-accent"
         )}
+        aria-label={props["aria-label"]}
       >
         <SelectValue />
       </SelectTrigger>
