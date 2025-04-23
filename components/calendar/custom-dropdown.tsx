@@ -17,17 +17,27 @@ type DropDownType = {
   options?: DropdownOption[] | undefined;
 } & Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "children">;
 
+type DropdownVariantClasses = {
+  month_dropdown_class?: string;
+  year_dropdown_class?: string;
+};
+
 export default function CustomDropdown({
   props,
   open,
   onOpenChange,
+  dropdownClasses,
 }: {
   props: DropDownType;
   open: boolean;
   onOpenChange: (value: boolean) => void;
+  dropdownClasses?: DropdownVariantClasses;
 }): React.JSX.Element | undefined {
-  const { options, value, onChange, dir } = props;
+  const { options, value, onChange, dir, classNames } = props;
   const validDir = dir === "ltr" || dir === "rtl" ? dir : undefined;
+  const dropdownType = props["aria-label"]?.includes("Month")
+    ? "month"
+    : "year";
 
   const handleCalendarChange = (newValue: string) => {
     if (onChange) {
@@ -54,11 +64,15 @@ export default function CustomDropdown({
         className={cn(
           "px-2 py-1 h-7 w-24 font-medium hover:bg-accent",
           "transition-colors",
-          "hover:bg-accent"
+          "hover:bg-accent",
+          classNames.dropdown_root,
+          dropdownType === "month"
+            ? dropdownClasses?.month_dropdown_class
+            : dropdownClasses?.year_dropdown_class
         )}
         aria-label={props["aria-label"]}
       >
-        <SelectValue />
+        <SelectValue className={classNames.caption_label} />
       </SelectTrigger>
       <SelectContent>
         {options?.map(({ value, label, disabled }) => (
@@ -92,10 +106,12 @@ export function DropdownWrapper({
   props,
   openDropdowns,
   setDropdownOpen,
+  dropdownClasses,
 }: {
   props: DropDownType;
   openDropdowns: { [key: string]: boolean };
   setDropdownOpen: (dropdownType: "month" | "year", isOpen: boolean) => void;
+  dropdownClasses?: DropdownVariantClasses;
 }) {
   const dropdownType = props["aria-label"]?.includes("Month")
     ? "month"
@@ -106,6 +122,7 @@ export function DropdownWrapper({
       props={props}
       open={openDropdowns[dropdownType]}
       onOpenChange={(isOpen: boolean) => setDropdownOpen(dropdownType, isOpen)}
+      dropdownClasses={dropdownClasses}
     />
   );
 }
