@@ -70,6 +70,7 @@ export function BookedPickerGregorian() {
             Dropdown: (props) => (
               <DropdownWrapper
                 props={props}
+                id="booked-picker-gregorian"
                 openDropdowns={openDropdowns}
                 setDropdownOpen={setDropdownOpen}
               />

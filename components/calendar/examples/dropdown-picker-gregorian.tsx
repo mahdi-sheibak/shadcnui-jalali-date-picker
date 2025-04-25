@@ -45,6 +45,7 @@ export function DropdownPickerGregorian() {
             Dropdown: (props) => (
               <DropdownWrapper
                 props={props}
+                id="dropdown-picker-gregorian"
                 openDropdowns={openDropdowns}
                 setDropdownOpen={setDropdownOpen}
               />

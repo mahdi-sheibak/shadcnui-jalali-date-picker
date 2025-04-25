@@ -42,13 +42,16 @@ export function DropdownPickerJalali() {
           mode="single"
           captionLayout="dropdown"
           components={{
-            Dropdown: (props) => (
-              <DropdownWrapper
-                props={props}
-                openDropdowns={openDropdowns}
-                setDropdownOpen={setDropdownOpen}
-              />
-            ),
+            Dropdown: (props) => {
+              return (
+                <DropdownWrapper
+                  props={props}
+                  id="singleDropdown"
+                  openDropdowns={openDropdowns}
+                  setDropdownOpen={setDropdownOpen}
+                />
+              );
+            },
           }}
           startMonth={new Date(2020, 0)}
           selected={date}
