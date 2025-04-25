@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ClassNames, CustomComponents, DropdownOption } from "react-day-picker";
+import { DropdownProps } from "react-day-picker";
 import {
   Select,
   SelectContent,
@@ -10,12 +10,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-
-type DropDownType = {
-  components: CustomComponents;
-  classNames: ClassNames;
-  options?: DropdownOption[] | undefined;
-} & Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "children">;
 
 type DropdownVariantClasses = {
   month_dropdown_class?: string;
@@ -28,7 +22,7 @@ export default function CustomDropdown({
   onOpenChange,
   dropdownClasses,
 }: {
-  props: DropDownType;
+  props: DropdownProps;
   open: boolean;
   onOpenChange: (value: boolean) => void;
   dropdownClasses?: DropdownVariantClasses;
@@ -90,11 +84,11 @@ export default function CustomDropdown({
   );
 }
 
-export function useDropdowns(initial = { month: false, year: false }) {
+export function useDropdowns(initial: Record<string, boolean> = {}) {
   const [openDropdowns, setOpenDropdowns] = React.useState(initial);
 
-  const setDropdownOpen = (dropdownType: "month" | "year", isOpen: boolean) => {
-    setOpenDropdowns((prev) => ({ ...prev, [dropdownType]: isOpen }));
+  const setDropdownOpen = (dropdownId: string, isOpen: boolean) => {
+    setOpenDropdowns((prev) => ({ ...prev, [dropdownId]: isOpen }));
   };
 
   const isAnyDropdownOpen = Object.values(openDropdowns).some(Boolean);
@@ -104,24 +98,27 @@ export function useDropdowns(initial = { month: false, year: false }) {
 
 export function DropdownWrapper({
   props,
+  id = "default",
   openDropdowns,
   setDropdownOpen,
   dropdownClasses,
 }: {
-  props: DropDownType;
-  openDropdowns: { [key: string]: boolean };
-  setDropdownOpen: (dropdownType: "month" | "year", isOpen: boolean) => void;
+  props: DropdownProps;
+  id: string;
+  openDropdowns: Record<string, boolean>;
+  setDropdownOpen: (dropdownId: string, isOpen: boolean) => void;
   dropdownClasses?: DropdownVariantClasses;
 }) {
   const dropdownType = props["aria-label"]?.includes("Month")
     ? "month"
     : "year";
+  const dropdownKey = `${id}-${dropdownType}`;
 
   return (
     <CustomDropdown
       props={props}
-      open={openDropdowns[dropdownType]}
-      onOpenChange={(isOpen: boolean) => setDropdownOpen(dropdownType, isOpen)}
+      open={openDropdowns[dropdownKey]}
+      onOpenChange={(isOpen: boolean) => setDropdownOpen(dropdownKey, isOpen)}
       dropdownClasses={dropdownClasses}
     />
   );
