@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ClassNames, CustomComponents, DropdownOption } from "react-day-picker";
+import { DropdownProps } from "react-day-picker";
 import {
   Select,
   SelectContent,
@@ -11,24 +11,27 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 
-type DropDownType = {
-  components: CustomComponents;
-  classNames: ClassNames;
-  options?: DropdownOption[] | undefined;
-} & Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "children">;
+type DropdownVariantClasses = {
+  month_dropdown_class?: string;
+  year_dropdown_class?: string;
+};
 
 export default function CustomDropdown({
   props,
   open,
   onOpenChange,
+  dropdownClasses,
 }: {
-  props: DropDownType;
-  // TODO: make bellow types required
-  open?: boolean;
-  onOpenChange?: (value: boolean) => void;
+  props: DropdownProps;
+  open: boolean;
+  onOpenChange: (value: boolean) => void;
+  dropdownClasses?: DropdownVariantClasses;
 }): React.JSX.Element | undefined {
-  const { options, value, onChange, dir } = props;
+  const { options, value, onChange, dir, classNames } = props;
   const validDir = dir === "ltr" || dir === "rtl" ? dir : undefined;
+  const dropdownType = props["aria-label"]?.includes("Month")
+    ? "month"
+    : "year";
 
   const handleCalendarChange = (newValue: string) => {
     if (onChange) {
@@ -55,10 +58,15 @@ export default function CustomDropdown({
         className={cn(
           "px-2 py-1 h-7 w-24 font-medium hover:bg-accent",
           "transition-colors",
-          "hover:bg-accent"
+          "hover:bg-accent",
+          classNames.dropdown_root,
+          dropdownType === "month"
+            ? dropdownClasses?.month_dropdown_class
+            : dropdownClasses?.year_dropdown_class
         )}
+        aria-label={props["aria-label"]}
       >
-        <SelectValue />
+        <SelectValue className={classNames.caption_label} />
       </SelectTrigger>
       <SelectContent>
         {options?.map(({ value, label, disabled }) => (
@@ -76,11 +84,11 @@ export default function CustomDropdown({
   );
 }
 
-export function useDropdowns(initial = { month: false, year: false }) {
+export function useDropdowns(initial: Record<string, boolean> = {}) {
   const [openDropdowns, setOpenDropdowns] = React.useState(initial);
 
-  const setDropdownOpen = (dropdownType: "month" | "year", isOpen: boolean) => {
-    setOpenDropdowns((prev) => ({ ...prev, [dropdownType]: isOpen }));
+  const setDropdownOpen = (dropdownId: string, isOpen: boolean) => {
+    setOpenDropdowns((prev) => ({ ...prev, [dropdownId]: isOpen }));
   };
 
   const isAnyDropdownOpen = Object.values(openDropdowns).some(Boolean);
@@ -90,22 +98,28 @@ export function useDropdowns(initial = { month: false, year: false }) {
 
 export function DropdownWrapper({
   props,
+  id = "default",
   openDropdowns,
   setDropdownOpen,
+  dropdownClasses,
 }: {
-  props: DropDownType;
-  openDropdowns: { [key: string]: boolean };
-  setDropdownOpen: (dropdownType: "month" | "year", isOpen: boolean) => void;
+  props: DropdownProps;
+  id: string;
+  openDropdowns: Record<string, boolean>;
+  setDropdownOpen: (dropdownId: string, isOpen: boolean) => void;
+  dropdownClasses?: DropdownVariantClasses;
 }) {
   const dropdownType = props["aria-label"]?.includes("Month")
     ? "month"
     : "year";
+  const dropdownKey = `${id}-${dropdownType}`;
 
   return (
     <CustomDropdown
       props={props}
-      open={openDropdowns[dropdownType]}
-      onOpenChange={(isOpen: boolean) => setDropdownOpen(dropdownType, isOpen)}
+      open={openDropdowns[dropdownKey]}
+      onOpenChange={(isOpen: boolean) => setDropdownOpen(dropdownKey, isOpen)}
+      dropdownClasses={dropdownClasses}
     />
   );
 }

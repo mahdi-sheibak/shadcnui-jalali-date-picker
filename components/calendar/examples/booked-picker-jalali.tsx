@@ -75,6 +75,7 @@ export function BookedPickerJalali() {
             Dropdown: (props) => (
               <DropdownWrapper
                 props={props}
+                id="booked-picker-jalali"
                 openDropdowns={openDropdowns}
                 setDropdownOpen={setDropdownOpen}
               />

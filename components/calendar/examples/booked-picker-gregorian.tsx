@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import * as React from "react";
 import { add, sub, format } from "date-fns";
@@ -12,7 +12,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { gregorianFormatWeekdayName, normalizeDate } from "@/lib/calendar";
-import CustomDropdown from "../custom-dropdown";
+import { DropdownWrapper, useDropdowns } from "../custom-dropdown";
 import { CalendarGregorian } from "../calendar-gregorian";
 
 const todayDate = new Date();
@@ -29,6 +29,8 @@ const bookedDates = [
 
 export function BookedPickerGregorian() {
   const [date, setDate] = React.useState<Date>();
+  const [bookedOpen, setBookedOpen] = React.useState(false);
+  const { openDropdowns, setDropdownOpen, isAnyDropdownOpen } = useDropdowns();
 
   function handleDayChange(value: Date | undefined) {
     const isSelectBooked = bookedDates.find(
@@ -38,7 +40,10 @@ export function BookedPickerGregorian() {
   }
 
   return (
-    <Popover>
+    <Popover
+      open={bookedOpen}
+      onOpenChange={(e) => !isAnyDropdownOpen && setBookedOpen(e)}
+    >
       <PopoverTrigger asChild>
         <Button
           variant={"outline"}
@@ -62,9 +67,14 @@ export function BookedPickerGregorian() {
             booked: "bg-chart-2/50 rounded-md text-white pointer-events-none",
           }}
           components={{
-            Dropdown(props) {
-              return <CustomDropdown props={props} />;
-            },
+            Dropdown: (props) => (
+              <DropdownWrapper
+                props={props}
+                id="booked-picker-gregorian"
+                openDropdowns={openDropdowns}
+                setDropdownOpen={setDropdownOpen}
+              />
+            ),
           }}
           startMonth={new Date(2020, 0)}
           selected={date}
