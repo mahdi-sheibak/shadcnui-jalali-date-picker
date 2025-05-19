@@ -28,7 +28,7 @@ export function MultiplePicker() {
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
           {dateList.length ? (
-            <div>
+            <div className="ButtonContentScroll">
               {dateList.map((date, index) => (
                 <span key={index}>{format(date, "PPP")} and </span>
               ))}
