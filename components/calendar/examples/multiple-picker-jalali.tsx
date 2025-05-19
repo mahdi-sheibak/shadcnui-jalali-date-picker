@@ -22,13 +22,13 @@ export function MultiplePickerJalali() {
         <Button
           variant={"outline"}
           className={cn(
-            "w-[260px] justify-start text-left font-normal",
+            "w-[260px] justify-start font-normal",
             !dateList.length && "text-muted-foreground"
           )}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
           {dateList.length ? (
-            <div>
+            <div className="ButtonContentScroll">
               {dateList.map((date, index) => (
                 <span key={index}>{format(date, "PPP")} و </span>
               ))}

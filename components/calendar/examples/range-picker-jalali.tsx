@@ -29,7 +29,7 @@ export function RangePickerJalali() {
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
           {dateRange ? (
-            <span>
+            <span className="ButtonContentScroll">
               از {dateRange.from && format(dateRange.from, "PPP")} تا{" "}
               {dateRange.to && format(dateRange.to, "PPP")}
             </span>

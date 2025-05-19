@@ -50,8 +50,12 @@ export const getClassNames = (props: CalendarProps): Partial<ClassNames> => {
     range_end: "day-range-end",
     selected:
       "bg-primary rounded-md text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",
-    today:
-      "bg-primary/10 aria-selected:bg-primary text-accent-foreground rounded-md",
+    today: cn(
+      "bg-primary/10 text-accent-foreground rounded-md",
+      props.mode === "range"
+        ? "aria-selected:text-chart-1"
+        : "aria-selected:bg-primary"
+    ),
     outside:
       "day-outside text-muted-foreground opacity-50 aria-selected:bg-primary/60",
     disabled: "text-muted-foreground opacity-50",

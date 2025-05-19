@@ -29,7 +29,7 @@ export function RangePicker() {
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
           {dateRange ? (
-            <span>
+            <span className="ButtonContentScroll">
               from {dateRange.from && format(dateRange.from, "PPP")} to{" "}
               {dateRange.to && format(dateRange.to, "PPP")}
             </span>
