@@ -65,12 +65,7 @@ export function BookedPickerJalali() {
         <CalendarJalali
           mode="single"
           captionLayout="dropdown"
-          modifiers={{
-            booked: bookedDates,
-          }}
-          modifiersClassNames={{
-            booked: "bg-chart-2/50 rounded-md text-white pointer-events-none",
-          }}
+          disabled={bookedDates}
           components={{
             Dropdown: (props) => (
               <DropdownWrapper
@@ -87,7 +82,10 @@ export function BookedPickerJalali() {
           defaultMonth={date}
           formatters={{ formatWeekdayName: jalaliFormatWeekdayName }}
           className="w-[380px]"
-          classNames={{ month_caption: "" }}
+          classNames={{
+            month_caption: "",
+            disabled: "bg-chart-2/50 opacity-90 rounded-md text-white",
+          }}
         />
       </PopoverContent>
     </Popover>
