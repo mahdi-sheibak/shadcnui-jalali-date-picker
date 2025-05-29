@@ -1,18 +1,16 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { format } from "date-fns-jalali";
-import { Calendar as CalendarIcon } from "lucide-react";
-import { DateRange } from "react-day-picker";
+import type { DateRange } from 'react-day-picker';
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { CalendarJalali } from "../calendar-jalali";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { format } from 'date-fns-jalali';
+import { Calendar as CalendarIcon } from 'lucide-react';
+import * as React from 'react';
+
+import { Button } from '@/components/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
+
+import { CalendarJalali } from '../calendar-jalali';
 
 export function RangePickerJalali() {
   const [dateRange, setDateRange] = React.useState<DateRange>();
@@ -20,30 +18,19 @@ export function RangePickerJalali() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button
-          variant={"outline"}
-          className={cn(
-            "w-[280px] justify-start text-left font-normal",
-            !dateRange && "text-muted-foreground"
-          )}
-        >
+        <Button className={cn('w-[280px] justify-start text-left font-normal', !dateRange && 'text-muted-foreground')} variant="outline">
           <CalendarIcon className="mr-2 h-4 w-4" />
           {dateRange ? (
             <span className="ButtonContentScroll">
-              از {dateRange.from && format(dateRange.from, "PPP")} تا{" "}
-              {dateRange.to && format(dateRange.to, "PPP")}
+              از {dateRange.from && format(dateRange.from, 'PPP')} تا {dateRange.to && format(dateRange.to, 'PPP')}
             </span>
           ) : (
-            <span>{"محدوده مورد نظر را انتخاب کنید"}</span>
+            <span>محدوده مورد نظر را انتخاب کنید</span>
           )}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
-        <CalendarJalali
-          mode="range"
-          selected={dateRange}
-          onSelect={setDateRange}
-        />
+        <CalendarJalali selected={dateRange} mode="range" onSelect={setDateRange} />
       </PopoverContent>
     </Popover>
   );

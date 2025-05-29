@@ -1,19 +1,16 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { format } from "date-fns-jalali";
-import { Calendar as CalendarIcon } from "lucide-react";
+import { format } from 'date-fns-jalali';
+import { Calendar as CalendarIcon } from 'lucide-react';
+import * as React from 'react';
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { CalendarJalali } from "../calendar-jalali";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { jalaliFormatWeekdayName } from "@/lib/calendar";
-import { DropdownWrapper, useDropdowns } from "../custom-dropdown";
+import { Button } from '@/components/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { jalaliFormatWeekdayName } from '@/lib/calendar';
+import { cn } from '@/lib/utils';
+
+import { CalendarJalali } from '../calendar-jalali';
+import { DropdownWrapper, useDropdowns } from '../custom-dropdown';
 
 export function DropdownPickerJalali() {
   const [date, setDate] = React.useState<Date>();
@@ -21,46 +18,30 @@ export function DropdownPickerJalali() {
   const { openDropdowns, setDropdownOpen, isAnyDropdownOpen } = useDropdowns();
 
   return (
-    <Popover
-      open={pickerOpen}
-      onOpenChange={(e) => !isAnyDropdownOpen && setPickerOpen(e)}
-    >
+    <Popover onOpenChange={e => !isAnyDropdownOpen && setPickerOpen(e)} open={pickerOpen}>
       <PopoverTrigger asChild>
-        <Button
-          variant={"outline"}
-          className={cn(
-            "w-[280px] justify-start text-left font-normal",
-            !date && "text-muted-foreground"
-          )}
-        >
+        <Button className={cn('w-[280px] justify-start text-left font-normal', !date && 'text-muted-foreground')} variant="outline">
           <CalendarIcon className="mr-2 h-4 w-4" />
-          {date ? format(date, "PPP") : <span>یک تاریخ را انتخاب کنید</span>}
+          {date ? format(date, 'PPP') : <span>یک تاریخ را انتخاب کنید</span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
         <CalendarJalali
-          mode="single"
+          className="w-[380px]"
+          selected={date}
           captionLayout="dropdown"
           components={{
-            Dropdown: (props) => {
-              return (
-                <DropdownWrapper
-                  props={props}
-                  id="singleDropdown"
-                  openDropdowns={openDropdowns}
-                  setDropdownOpen={setDropdownOpen}
-                />
-              );
+            Dropdown: props => {
+              return <DropdownWrapper id="singleDropdown" openDropdowns={openDropdowns} props={props} setDropdownOpen={setDropdownOpen} />;
             },
           }}
-          startMonth={new Date(2020, 0)}
-          selected={date}
-          onSelect={setDate}
           defaultMonth={date}
           formatters={{ formatWeekdayName: jalaliFormatWeekdayName }}
-          className="w-[380px]"
+          mode="single"
+          onSelect={setDate}
+          startMonth={new Date(2020, 0)}
           classNames={{
-            month_caption: "",
+            month_caption: '',
           }}
         />
       </PopoverContent>
