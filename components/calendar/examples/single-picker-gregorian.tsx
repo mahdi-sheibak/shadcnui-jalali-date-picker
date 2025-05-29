@@ -1,17 +1,14 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { format } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
+import { format } from 'date-fns';
+import { Calendar as CalendarIcon } from 'lucide-react';
+import * as React from 'react';
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { CalendarGregorian } from "../calendar-gregorian";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Button } from '@/components/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
+
+import { CalendarGregorian } from '../calendar-gregorian';
 
 export function DatePicker() {
   const [date, setDate] = React.useState<Date>();
@@ -19,19 +16,13 @@ export function DatePicker() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button
-          variant={"outline"}
-          className={cn(
-            "w-[280px] justify-start text-left font-normal",
-            !date && "text-muted-foreground"
-          )}
-        >
+        <Button className={cn('w-[280px] justify-start text-left font-normal', !date && 'text-muted-foreground')} variant="outline">
           <CalendarIcon className="mr-2 h-4 w-4" />
-          {date ? format(date, "PPP") : <span>Pick a date</span>}
+          {date ? format(date, 'PPP') : <span>Pick a date</span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
-        <CalendarGregorian mode="single" selected={date} onSelect={setDate} />
+        <CalendarGregorian selected={date} mode="single" onSelect={setDate} />
       </PopoverContent>
     </Popover>
   );
