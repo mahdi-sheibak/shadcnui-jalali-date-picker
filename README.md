@@ -1,6 +1,7 @@
 # ShadcnUI Jalali Date Picker
 
-Collection of modern **Jalali date picker** components built with [Shadcn UI](https://ui.shadcn.com/) and [react-day-picker](https://daypicker.dev/).
+Collection of modern **Jalali date picker** components built with [Shadcn UI](https://ui.shadcn.com/) and
+[react-day-picker](https://daypicker.dev/).
 
 ![shadcn jalali calendar examples screenshot](https://github.com/user-attachments/assets/532a949a-805c-42f6-b857-f21d9bdd0528)
 
