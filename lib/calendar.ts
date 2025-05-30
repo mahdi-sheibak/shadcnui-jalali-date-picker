@@ -10,7 +10,3 @@ export const jalaliFormatWeekdayName: Formatters['formatWeekdayName'] = (day: Da
 export const gregorianFormatWeekdayName: Formatters['formatWeekdayName'] = (day: Date) => {
   return format(day, 'EEE');
 };
-
-export function normalizeDate(date: Date): Date {
-  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-}
