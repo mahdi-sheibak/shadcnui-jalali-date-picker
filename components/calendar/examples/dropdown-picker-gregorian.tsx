@@ -1,24 +1,21 @@
 'use client';
-
 import { format } from 'date-fns';
 import { Calendar as CalendarIcon } from 'lucide-react';
 import * as React from 'react';
 
+import { CalendarGregorian } from '@/components/calendar/calendar-gregorian';
+import { MonthsDropdown } from '@/components/calendar/months-dropdown';
+import { YearsDropdown } from '@/components/calendar/years-dropdown';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { gregorianFormatWeekdayName } from '@/lib/calendar';
 import { cn } from '@/lib/utils';
 
-import { CalendarGregorian } from '../calendar-gregorian';
-import { DropdownWrapper, useDropdowns } from '../custom-dropdown';
-
 export function DropdownPickerGregorian() {
   const [date, setDate] = React.useState<Date>();
-  const [pickerOpen, setPickerOpen] = React.useState(false);
-  const { openDropdowns, setDropdownOpen, isAnyDropdownOpen } = useDropdowns();
 
   return (
-    <Popover onOpenChange={e => !isAnyDropdownOpen && setPickerOpen(e)} open={pickerOpen}>
+    <Popover>
       <PopoverTrigger asChild>
         <Button className={cn('w-[280px] justify-start text-left font-normal', !date && 'text-muted-foreground')} variant="outline">
           <CalendarIcon className="mr-2 h-4 w-4" />
@@ -31,14 +28,8 @@ export function DropdownPickerGregorian() {
           selected={date}
           captionLayout="dropdown"
           components={{
-            Dropdown: props => (
-              <DropdownWrapper
-                id="dropdown-picker-gregorian"
-                openDropdowns={openDropdowns}
-                props={props}
-                setDropdownOpen={setDropdownOpen}
-              />
-            ),
+            MonthsDropdown,
+            YearsDropdown,
           }}
           defaultMonth={date}
           formatters={{ formatWeekdayName: gregorianFormatWeekdayName }}

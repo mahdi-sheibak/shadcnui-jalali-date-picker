@@ -1,4 +1,5 @@
 'use client';
+import type { ChevronProps } from 'react-day-picker';
 
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import * as React from 'react';
@@ -15,11 +16,7 @@ function CalendarGregorian({ components, showOutsideDays = true, className, clas
     <DayPicker
       className={cn('p-3', className)}
       components={{
-        Chevron(props) {
-          if (props.orientation === 'left') return <ChevronRightIcon className="h-4 w-4" />;
-          else if (props.orientation === 'right') return <ChevronLeftIcon className="h-4 w-4" />;
-          return <span />;
-        },
+        Chevron,
         ...components,
       }}
       showOutsideDays={showOutsideDays}
@@ -32,5 +29,11 @@ function CalendarGregorian({ components, showOutsideDays = true, className, clas
   );
 }
 CalendarGregorian.displayName = 'CalendarGregorian';
+
+function Chevron({ orientation }: ChevronProps) {
+  if (orientation === 'left') return <ChevronRightIcon className="h-4 w-4" />;
+  else if (orientation === 'right') return <ChevronLeftIcon className="h-4 w-4" />;
+  return <span />;
+}
 
 export { CalendarGregorian };

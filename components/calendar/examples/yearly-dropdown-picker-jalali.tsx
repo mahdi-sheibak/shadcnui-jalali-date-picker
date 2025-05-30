@@ -4,6 +4,8 @@ import { addYears, format, startOfYear, subYears } from 'date-fns-jalali';
 import { Calendar as CalendarIcon } from 'lucide-react';
 import { useState } from 'react';
 
+import { MonthsDropdown } from '@/components/calendar/months-dropdown';
+import { YearsDropdown } from '@/components/calendar/years-dropdown';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { jalaliFormatWeekdayName } from '@/lib/calendar';
@@ -11,12 +13,9 @@ import { cn } from '@/lib/utils';
 
 import { CalendarJalali } from '../calendar-jalali';
 import { END_YEAR_JALALI, START_YEAR_JALALI } from '../calendar-utils';
-import { DropdownWrapper, useDropdowns } from '../custom-dropdown';
 
 export function YearlyDropdownPickerJalali() {
   const [yearlyDate, setYearlyDate] = useState<DateRange>();
-  const [pickerOpen, setPickerOpen] = useState(false);
-  const { openDropdowns, setDropdownOpen, isAnyDropdownOpen } = useDropdowns();
 
   function updateYear(date: Date, type: 'from' | 'to') {
     setYearlyDate(prev => ({ ...prev, [type]: date }) as DateRange);
@@ -35,13 +34,13 @@ export function YearlyDropdownPickerJalali() {
   function getLabel() {
     return (
       <>
-        {renderYear(yearlyDate?.from)} {yearlyDate?.from && yearlyDate?.to && 'تا'} {renderYear(yearlyDate?.to)}
+        {renderYear(yearlyDate?.from)} {yearlyDate?.from && yearlyDate.to && 'تا'} {renderYear(yearlyDate?.to)}
       </>
     );
   }
 
   return (
-    <Popover onOpenChange={open => !isAnyDropdownOpen && setPickerOpen(open)} open={pickerOpen}>
+    <Popover>
       <PopoverTrigger asChild>
         <Button
           variant="outline"
@@ -61,15 +60,8 @@ export function YearlyDropdownPickerJalali() {
             key={type}
             captionLayout="dropdown"
             components={{
-              Dropdown: props => (
-                <DropdownWrapper
-                  id={`${type}-YearlyDropdown`}
-                  dropdownClasses={{ month_dropdown_class: 'hidden' }}
-                  openDropdowns={openDropdowns}
-                  props={props}
-                  setDropdownOpen={setDropdownOpen}
-                />
-              ),
+              MonthsDropdown,
+              YearsDropdown,
             }}
             defaultMonth={new Date()}
             endMonth={END_YEAR_JALALI}
