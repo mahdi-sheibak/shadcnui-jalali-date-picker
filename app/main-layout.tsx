@@ -1,5 +1,5 @@
 import { iranSans, iranSansFaNum } from '@/app/fonts';
-import { Header } from '@/components/header';
+import { Header } from '@/components/header2';
 
 interface Props {
   children: React.ReactNode;
