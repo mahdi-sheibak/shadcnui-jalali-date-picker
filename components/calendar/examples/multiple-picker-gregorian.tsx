@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 
 import { CalendarGregorian } from '../calendar-gregorian';
 
-export function MultiplePicker() {
+export function MultiplePickerGregorian() {
   const [dateList, setDateList] = React.useState<Date[]>([]);
 
   return (
@@ -22,8 +22,8 @@ export function MultiplePicker() {
           <CalendarIcon className="mr-2 h-4 w-4" />
           {dateList.length ? (
             <div className="ButtonContentScroll">
-              {dateList.map((date, index) => (
-                <span key={index}>{format(date, 'PPP')} and </span>
+              {dateList.map(date => (
+                <span key={date.toISOString()}>{format(date, 'PPP')} and </span>
               ))}
             </div>
           ) : (

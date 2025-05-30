@@ -19,8 +19,8 @@ export function MultiplePickerJalali() {
           <CalendarIcon className="mr-2 h-4 w-4" />
           {dateList.length ? (
             <div className="ButtonContentScroll">
-              {dateList.map((date, index) => (
-                <span key={index}>{format(date, 'PPP')} و </span>
+              {dateList.map(date => (
+                <span key={date.toISOString()}>{format(date, 'PPP')} و </span>
               ))}
             </div>
           ) : (

@@ -1,17 +1,12 @@
 import { iranSans, iranSansFaNum } from '@/app/fonts';
-import Header from '@/components/Header';
+import { Header } from '@/components/header';
 
-import '../app/globals.css';
-
-export default function LayoutWrapper({
-  children,
-  lang = 'fa',
-  dir = 'rtl',
-}: Readonly<{
+interface Props {
   children: React.ReactNode;
-  lang?: string;
-  dir?: string;
-}>) {
+  lang: string;
+  dir: string;
+}
+export function MainLayout({ children, lang, dir }: Props) {
   return (
     <html dir={dir} lang={lang}>
       <body className={`${iranSansFaNum.className} ${iranSans.className} antialiased`}>
