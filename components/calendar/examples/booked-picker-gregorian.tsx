@@ -3,14 +3,13 @@ import { add, format, sub } from 'date-fns';
 import { Calendar as CalendarIcon } from 'lucide-react';
 import * as React from 'react';
 
+import { CalendarGregorian } from '@/components/calendar/calendar-gregorian';
 import { MonthsDropdown } from '@/components/calendar/months-dropdown';
 import { YearsDropdown } from '@/components/calendar/years-dropdown';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { gregorianFormatWeekdayName, normalizeDate } from '@/lib/calendar';
+import { gregorianFormatWeekdayName } from '@/lib/calendar';
 import { cn } from '@/lib/utils';
-
-import { CalendarGregorian } from '../calendar-gregorian';
 
 const todayDate = new Date();
 const bookedDates = [
@@ -26,11 +25,6 @@ const bookedDates = [
 
 export function BookedPickerGregorian() {
   const [date, setDate] = React.useState<Date>();
-
-  function handleDayChange(value: Date | undefined) {
-    const isSelectBooked = bookedDates.find(booked => normalizeDate(booked).getTime() === value?.getTime());
-    if (!isSelectBooked) return setDate(value);
-  }
 
   return (
     <Popover>
@@ -53,10 +47,9 @@ export function BookedPickerGregorian() {
           defaultMonth={date}
           formatters={{ formatWeekdayName: gregorianFormatWeekdayName }}
           mode="single"
-          onSelect={handleDayChange}
+          onSelect={setDate}
           startMonth={new Date(2020, 0)}
           classNames={{
-            month_caption: '',
             disabled: 'bg-chart-2/50 opacity-90 rounded-md text-white',
           }}
         />

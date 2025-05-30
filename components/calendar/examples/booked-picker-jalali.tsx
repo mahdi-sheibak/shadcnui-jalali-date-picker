@@ -8,7 +8,7 @@ import { MonthsDropdown } from '@/components/calendar/months-dropdown';
 import { YearsDropdown } from '@/components/calendar/years-dropdown';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { jalaliFormatWeekdayName, normalizeDate } from '@/lib/calendar';
+import { jalaliFormatWeekdayName } from '@/lib/calendar';
 import { cn } from '@/lib/utils';
 
 const todayDate = new Date();
@@ -25,11 +25,6 @@ const bookedDates = [
 
 export function BookedPickerJalali() {
   const [date, setDate] = React.useState<Date>();
-
-  function handleDayChange(value: Date | undefined) {
-    const isSelectBooked = bookedDates.find(booked => normalizeDate(booked).getTime() === value?.getTime());
-    if (!isSelectBooked) return setDate(value);
-  }
 
   return (
     <Popover>
@@ -52,10 +47,9 @@ export function BookedPickerJalali() {
           defaultMonth={date}
           formatters={{ formatWeekdayName: jalaliFormatWeekdayName }}
           mode="single"
-          onSelect={handleDayChange}
+          onSelect={setDate}
           startMonth={new Date(2020, 0)}
           classNames={{
-            month_caption: '',
             disabled: 'bg-chart-2/50 opacity-90 rounded-md text-white',
           }}
         />

@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils';
 
 import { CalendarGregorian } from '../calendar-gregorian';
 
-export function RangePicker() {
+export function RangePickerGregorian() {
   const [dateRange, setDateRange] = React.useState<DateRange>();
 
   return (

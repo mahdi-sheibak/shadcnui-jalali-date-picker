@@ -36,9 +36,6 @@ export function DropdownPickerGregorian() {
           mode="single"
           onSelect={setDate}
           startMonth={new Date(2020, 0)}
-          classNames={{
-            month_caption: '',
-          }}
         />
       </PopoverContent>
     </Popover>

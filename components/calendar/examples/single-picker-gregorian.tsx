@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 
 import { CalendarGregorian } from '../calendar-gregorian';
 
-export function DatePicker() {
+export function DatePickerGregorian() {
   const [date, setDate] = React.useState<Date>();
 
   return (

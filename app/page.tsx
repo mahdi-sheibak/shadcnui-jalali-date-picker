@@ -2,20 +2,20 @@
 
 import React from 'react';
 
+import { MainLayout } from '@/app/main-layout';
 import { CalendarJalali } from '@/components/calendar/calendar-jalali';
 import { BookedPickerJalali } from '@/components/calendar/examples/booked-picker-jalali';
 import { DropdownPickerJalali } from '@/components/calendar/examples/dropdown-picker-jalali';
-import { MonthlyDropdownPickerJalali } from '@/components/calendar/examples/monthly-dropdown-picker-jalali';
+import { MonthPickerJalali } from '@/components/calendar/examples/month-picker-jalali';
 import { MultiplePickerJalali } from '@/components/calendar/examples/multiple-picker-jalali';
 import { RangePickerJalali } from '@/components/calendar/examples/range-picker-jalali';
 import { DatePickerJalali } from '@/components/calendar/examples/single-picker-jalali';
-import { YearlyDropdownPickerJalali } from '@/components/calendar/examples/yearly-dropdown-picker-jalali';
-import LayoutWrapper from '@/components/LayoutWrapper';
+import { YearPickerJalali } from '@/components/calendar/examples/year-picker-jalali';
 import { jalaliFormatWeekdayName } from '@/lib/calendar';
 
 export default function Home() {
   return (
-    <LayoutWrapper>
+    <MainLayout dir="rtl" lang="fa">
       <div className="flex flex-col gap-12 z-10 mb-36">
         <div className="space-y-5">
           <h3>تقویم های جلالی</h3>
@@ -36,11 +36,11 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <DropdownPickerJalali />
             <BookedPickerJalali />
-            <MonthlyDropdownPickerJalali />
-            <YearlyDropdownPickerJalali />
+            <MonthPickerJalali />
+            <YearPickerJalali />
           </div>
         </div>
       </div>
-    </LayoutWrapper>
+    </MainLayout>
   );
 }
