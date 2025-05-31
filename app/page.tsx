@@ -10,6 +10,7 @@ import { MonthPickerJalali } from '@/components/calendar/examples/month-picker-j
 import { MultiplePickerJalali } from '@/components/calendar/examples/multiple-picker-jalali';
 import { RangePickerJalali } from '@/components/calendar/examples/range-picker-jalali';
 import { DatePickerJalali } from '@/components/calendar/examples/single-picker-jalali';
+import { YearNavigationJalali } from '@/components/calendar/examples/year-navigation-jalali';
 import { YearPickerJalali } from '@/components/calendar/examples/year-picker-jalali';
 import { jalaliFormatWeekdayName } from '@/lib/calendar';
 
@@ -38,6 +39,7 @@ export default function Home() {
             <BookedPickerJalali />
             <MonthPickerJalali />
             <YearPickerJalali />
+            <YearNavigationJalali />
           </div>
         </div>
       </div>
