@@ -6,6 +6,7 @@ import { MainLayout } from '@/app/main-layout';
 import { CalendarJalali } from '@/components/calendar/calendar-jalali';
 import { BookedPickerJalali } from '@/components/calendar/examples/booked-picker-jalali';
 import { DropdownPickerJalali } from '@/components/calendar/examples/dropdown-picker-jalali';
+import { FlightPickerJalali } from '@/components/calendar/examples/flight-picker-jalali';
 import { MonthPickerJalali } from '@/components/calendar/examples/month-picker-jalali';
 import { MultiplePickerJalali } from '@/components/calendar/examples/multiple-picker-jalali';
 import { RangePickerJalali } from '@/components/calendar/examples/range-picker-jalali';
@@ -19,6 +20,7 @@ export default function Home() {
     <MainLayout dir="rtl" lang="fa">
       <div className="flex flex-col gap-12 z-10 mb-36">
         <div className="space-y-5">
+          <p>flight</p>
           <h3>تقویم های جلالی</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <DatePickerJalali />
@@ -40,6 +42,7 @@ export default function Home() {
             <MonthPickerJalali />
             <YearPickerJalali />
             <YearNavigationJalali />
+            <FlightPickerJalali />
           </div>
         </div>
       </div>
