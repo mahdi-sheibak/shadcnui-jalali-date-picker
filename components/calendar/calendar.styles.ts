@@ -26,7 +26,8 @@ export const getClassNames = (props: CalendarProps): Partial<ClassNames> => {
     ),
     button_previous: cn(
       buttonVariants({ variant: 'outline' }),
-      'h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100',
+      'h-7 w-7 bg-transparent p-0 opacity-50',
+      'hover:opacity-100',
       'absolute top-0 right-0 z-10 !m-0',
     ),
     month_grid: 'w-full border-collapse space-y-1',
