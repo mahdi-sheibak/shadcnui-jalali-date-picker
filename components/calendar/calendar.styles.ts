@@ -59,6 +59,6 @@ export const getClassNames = (props: CalendarProps): Partial<ClassNames> => {
     outside: 'day-outside text-muted-foreground opacity-50 aria-selected:bg-primary/60',
     disabled: 'text-muted-foreground opacity-50',
     range_middle: 'aria-selected:bg-accent aria-selected:text-accent-foreground',
-    hidden: 'invisible',
+    hidden: 'invisible w-8',
   };
 };
