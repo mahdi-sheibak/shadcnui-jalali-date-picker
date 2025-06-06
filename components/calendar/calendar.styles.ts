@@ -21,12 +21,14 @@ export const getClassNames = (props: CalendarProps): Partial<ClassNames> => {
     button_next: cn(
       buttonVariants({ variant: 'outline' }),
       'h-7 w-7 bg-transparent p-0 opacity-50',
+      "[&[aria-disabled='true']]:hover:opacity-40 [&[aria-disabled='true']]:hover:bg-transparent [&[aria-disabled='true']]:hover:cursor-default",
       'hover:opacity-100',
       'absolute top-0 left-0 z-10 !m-0',
     ),
     button_previous: cn(
       buttonVariants({ variant: 'outline' }),
       'h-7 w-7 bg-transparent p-0 opacity-50',
+      "[&[aria-disabled='true']]:hover:opacity-40 [&[aria-disabled='true']]:hover:bg-transparent [&[aria-disabled='true']]:hover:cursor-default",
       'hover:opacity-100',
       'absolute top-0 right-0 z-10 !m-0',
     ),
