@@ -53,10 +53,12 @@ export function FlightPickerJalali() {
           footer={
             <div className="p-3 flex justify-between w-full items-center">
               <div>
-                <span>
-                  <span className="text-neutral-400 ml-1">رفت</span>
-                  {format(selectedDate?.from ?? new Date(), 'd MMMM')}
-                </span>
+                {selectedDate?.from && (
+                  <span>
+                    <span className="text-neutral-400 ml-1">رفت</span>
+                    {format(selectedDate.from, 'd MMMM')}
+                  </span>
+                )}
                 {selectedDate?.to && (
                   <span className="mr-2">
                     - <span className="text-neutral-400 ml-1">برگشت</span>
