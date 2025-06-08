@@ -20,7 +20,6 @@ export default function Home() {
     <MainLayout dir="rtl" lang="fa">
       <div className="flex flex-col gap-12 z-10 mb-36">
         <div className="space-y-5">
-          <p>flight</p>
           <h3>تقویم های جلالی</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <DatePickerJalali />
