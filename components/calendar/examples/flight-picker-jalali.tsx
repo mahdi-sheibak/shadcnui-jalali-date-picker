@@ -13,6 +13,7 @@ import { MonthsDropdown } from '../months-dropdown';
 import { YearsDropdown } from '../years-dropdown';
 
 const END_YEAR = startOfYear(new Date(2030, 0));
+const START_MONTH = new Date(new Date().getFullYear(), new Date().getMonth());
 
 export function FlightPickerJalali() {
   const [selectedDate, setSelectedDate] = useState<DateRange>();
@@ -78,12 +79,16 @@ export function FlightPickerJalali() {
           }
           formatters={{ formatWeekdayName: date => format(date, 'EEEEEE') }}
           mode="range"
+          modifiers={{ weekend: { dayOfWeek: [5] } }}
+          modifiersClassNames={{
+            weekend: 'text-chart-1 opacity-100',
+          }}
           month={displayedMonth}
           numberOfMonths={2}
           onMonthChange={setDisplayedMonth}
           onSelect={setSelectedDate}
           showOutsideDays={false}
-          startMonth={new Date(new Date().getFullYear(), new Date().getMonth())}
+          startMonth={START_MONTH}
           classNames={{
             root: 'w-[650px] min-h-[270px]',
             month_caption: '',
