@@ -52,7 +52,7 @@ export function FlightPickerJalali() {
           defaultMonth={selectedDate?.from}
           endMonth={END_YEAR}
           footer={
-            <div className="p-3 flex justify-between w-full items-center">
+            <div className="py-3 flex justify-between w-full items-center">
               <div>
                 {selectedDate?.from && (
                   <span>
