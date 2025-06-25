@@ -6,6 +6,8 @@ import { MainLayout } from '@/app/main-layout';
 import { CalendarJalali } from '@/components/calendar/calendar-jalali';
 import { BookedPickerJalali } from '@/components/calendar/examples/booked-picker-jalali';
 import { DropdownPickerJalali } from '@/components/calendar/examples/dropdown-picker-jalali';
+import { FlightPickerJalali } from '@/components/calendar/examples/flight-picker-jalali';
+import { HolidaysPickerJalali } from '@/components/calendar/examples/holidays-picker';
 import { MonthPickerJalali } from '@/components/calendar/examples/month-picker-jalali';
 import { MultiplePickerJalali } from '@/components/calendar/examples/multiple-picker-jalali';
 import { RangePickerJalali } from '@/components/calendar/examples/range-picker-jalali';
@@ -40,6 +42,8 @@ export default function Home() {
             <MonthPickerJalali />
             <YearPickerJalali />
             <YearNavigationJalali />
+            <FlightPickerJalali />
+            <HolidaysPickerJalali />
           </div>
         </div>
       </div>
