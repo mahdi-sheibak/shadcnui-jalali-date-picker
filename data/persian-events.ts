@@ -1,5 +1,7 @@
+import type { Events } from '@/types';
+
 // collected from https://github.com/persian-calendar/persian-calendar
-export const persianEvents = [
+export const persianEvents: Events[] = [
   { holiday: true, month: 1, day: 1, type: 'Iran', title: 'آغاز نوروز' },
 
   { holiday: true, month: 1, day: 2, type: 'Iran', title: 'عید نوروز' },

@@ -1,5 +1,7 @@
+import type { Events } from '@/types';
+
 // collected from https://github.com/persian-calendar/persian-calendar
-export const gregorianEvents = [
+export const gregorianEvents: Events[] = [
   { holiday: false, month: 1, day: 1, title: 'آغاز سال میلادی', type: 'Iran' },
   { holiday: false, month: 1, day: 26, title: 'روز جهانی گمرک', type: 'Iran' },
   { holiday: false, month: 3, day: 22, title: 'روز جهانی آب', type: 'Iran' },
