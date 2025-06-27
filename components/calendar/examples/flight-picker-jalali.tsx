@@ -14,6 +14,7 @@ import { YearsDropdown } from '../years-dropdown';
 
 const END_YEAR = startOfYear(new Date(2030, 0));
 const START_MONTH = new Date(new Date().getFullYear(), new Date().getMonth());
+const today = new Date();
 
 export function FlightPickerJalali() {
   const [selectedDate, setSelectedDate] = useState<DateRange>();
@@ -41,7 +42,7 @@ export function FlightPickerJalali() {
       </PopoverTrigger>
       <PopoverContent className="w-fit p-0 shadow-none">
         <CalendarJalali
-          disabled={{ before: new Date() }}
+          disabled={{ before: today }}
           max={25}
           selected={selectedDate}
           captionLayout="dropdown"
@@ -52,30 +53,11 @@ export function FlightPickerJalali() {
           defaultMonth={selectedDate?.from}
           endMonth={END_YEAR}
           footer={
-            <div className="py-3 flex justify-between w-full items-center">
-              <div>
-                {selectedDate?.from && (
-                  <span>
-                    <span className="text-neutral-400 ml-1">رفت</span>
-                    {format(selectedDate.from, 'd MMMM')}
-                  </span>
-                )}
-                {selectedDate?.to && (
-                  <span className="mr-2">
-                    - <span className="text-neutral-400 ml-1">برگشت</span>
-                    {format(selectedDate.to, 'd MMMM')}
-                  </span>
-                )}
-              </div>
-              <Button
-                size="sm"
-                className="text-chart-5 hover:bg-transparent p-0 hover:text-chart-4"
-                variant="ghost"
-                onClick={() => setDisplayedMonth(new Date())}
-              >
-                برو به امروز
-              </Button>
-            </div>
+            <FooterContent
+              selectedDate={selectedDate}
+              isTodayButtonDisplayed={isTodayButtonVisible(displayedMonth)}
+              onTodayClick={() => setDisplayedMonth(today)}
+            />
           }
           formatters={{ formatWeekdayName: date => format(date, 'EEEEEE') }}
           mode="range"
@@ -97,5 +79,53 @@ export function FlightPickerJalali() {
         />
       </PopoverContent>
     </Popover>
+  );
+}
+
+function isTodayButtonVisible(displayedMonth: Date): boolean {
+  const displayedMonthNum = Number(format(displayedMonth, 'MM'));
+  const todayMonthNum = Number(format(today, 'MM'));
+  const secondDisplayedMonthNum = displayedMonthNum === 12 ? 1 : displayedMonthNum + 1;
+
+  return (
+    displayedMonth.getFullYear() === today.getFullYear() &&
+    (todayMonthNum === displayedMonthNum || todayMonthNum === secondDisplayedMonthNum)
+  );
+}
+
+function FooterContent({
+  selectedDate,
+  isTodayButtonDisplayed,
+  onTodayClick,
+}: {
+  selectedDate?: DateRange;
+  isTodayButtonDisplayed: boolean;
+  onTodayClick: () => void;
+}) {
+  const hasFooterContent = selectedDate?.from ?? selectedDate?.to ?? !isTodayButtonDisplayed;
+  if (!hasFooterContent) return null;
+
+  return (
+    <div className="py-3 flex justify-between w-full items-center">
+      <div>
+        {selectedDate?.from && (
+          <span>
+            <span className="text-neutral-400 ml-1">رفت</span>
+            {format(selectedDate.from, 'd MMMM')}
+          </span>
+        )}
+        {selectedDate?.to && (
+          <span className="mr-2">
+            - <span className="text-neutral-400 ml-1">برگشت</span>
+            {format(selectedDate.to, 'd MMMM')}
+          </span>
+        )}
+      </div>
+      {!isTodayButtonDisplayed && (
+        <Button size="sm" onClick={onTodayClick}>
+          برو به امروز
+        </Button>
+      )}
+    </div>
   );
 }
