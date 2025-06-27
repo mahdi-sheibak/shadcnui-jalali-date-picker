@@ -4,4 +4,7 @@ export default defineConfig({
   typescript: {
     tsconfigRootDir: import.meta.dirname,
   },
+  tailwind: {
+    entryPoint: './app/globals.css',
+  },
 });

@@ -17,15 +17,26 @@ import { jalaliFormatWeekdayName } from '@/lib/calendar';
 export default function Home() {
   return (
     <MainLayout dir="rtl" lang="fa">
-      <div className="flex flex-col gap-12 z-10 mb-36">
+      <div className="z-10 mb-36 flex flex-col gap-12">
         <div className="space-y-5">
           <h3>تقویم های جلالی</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div
+            className={`
+              grid grid-cols-1 gap-4
+              sm:grid-cols-2
+              lg:grid-cols-3
+            `}
+          >
             <DatePickerJalali />
             <RangePickerJalali />
             <MultiplePickerJalali />
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 my-5">
+          <div
+            className={`
+              my-5 grid grid-cols-1 gap-4
+              lg:grid-cols-2
+            `}
+          >
             <CalendarJalali mode="single" />
             <div className="w-[400px]">
               <CalendarJalali formatters={{ formatWeekdayName: jalaliFormatWeekdayName }} mode="single" />
@@ -34,7 +45,13 @@ export default function Home() {
         </div>
         <div className="space-y-5">
           <h3>تقویم های پیشرفته</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div
+            className={`
+              grid grid-cols-1 gap-4
+              sm:grid-cols-2
+              lg:grid-cols-3
+            `}
+          >
             <DropdownPickerJalali />
             <BookedPickerJalali />
             <MonthPickerJalali />

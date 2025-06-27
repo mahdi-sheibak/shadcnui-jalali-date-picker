@@ -20,7 +20,7 @@ function MonthsDropdown({ value, options, className, onChange, ...props }: Dropd
     >
       <SelectTrigger
         aria-label={props['aria-label']}
-        className={cn('px-2 py-1 h-7 w-24 font-medium', 'transition-colors', 'hover:bg-accent', className)}
+        className={cn('h-7 w-24 px-2 py-1 font-medium', 'transition-colors', 'hover:bg-accent', className)}
       >
         <SelectValue />
       </SelectTrigger>
