@@ -39,7 +39,7 @@ export function YearNavigationJalali() {
         <Button
           variant="outline"
           className={cn(
-            'min-w-[280px] max-w-fit whitespace-normal h-fit justify-start text-left font-normal',
+            'h-fit max-w-fit min-w-[280px] justify-start text-left font-normal whitespace-normal',
             !selectedDate && 'text-muted-foreground',
           )}
         >
