@@ -43,7 +43,7 @@ export function FlightPickerJalali() {
       <PopoverContent className="w-fit p-0 shadow-none">
         <CalendarJalali
           disabled={{ before: today }}
-          max={25}
+          // max={25}
           selected={selectedDate}
           captionLayout="dropdown"
           components={{
